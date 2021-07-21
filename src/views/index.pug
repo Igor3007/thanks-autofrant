@@ -1,0 +1,78 @@
+extends layouts/index
+include ../blocks/components/video/video
+include ../blocks/components/faq/faq.pug
+
+block variables
+  include ../data/data.pug
+
+mixin banner()
+  .wb-banner
+    .wb-banner__text
+      .wb-banner__title Каталог автоаксессуаров автофрант 
+      .wb-banner__link: a(href='#') Смотреть
+    .wb-banner__img: +bgimage('../img/common/wb-banner.png')
+
+mixin card(data)
+
+  .accessor-card
+    .accessor-card__badge
+      div скидки
+      div
+        span до
+        span= data.sale
+    .accessor-card__image: +bgimage(data.image)
+    .accessor-card__content
+      .accessor-card__action
+        .accessor-card__name: span= data.text
+        .accessor-card__btn: a(href='#') смотреть
+
+block header
+
+  header
+    .container
+      .header
+        .header__logo: a(href='/'): +bgimage('../img/common/logo.svg')
+        .header__offer Производство модельных авточехлов. <br> Гарантия до 5 лет. Доставка по РФ.
+        .header__btn: a(href='#'): button.btn.btn-blick Перейти на сайт
+
+block content
+
+  section.section-first-block
+    .container
+      .first-block
+        .first-block__icon: +icons('#ic_ok', 36)
+        .first-block__title Спасибо заявка принята!
+        .first-block__desc Менеджер ответит через 15 мин и пришлет обещанные материалы.
+
+  section.section-video-block
+    .container
+      .video-block
+        .video-block__left: +video({
+
+          link: 'https://www.youtube.com/watch?v=16CV2MzF6Xo',
+          preview: '../img/common/video-preview.jpg'
+        })
+        .video-block__right
+          .video-block__title Посмотрите видео и узнайте как получить автоаксессуары со скидкой <br> <span>от 25% до 60% с бесплатной доставкой</span>
+          .video-block__banner: +banner()
+          .video-block__action
+            .video-block__btn: button.btn.btn-arrow.btn-wb.btn-blick Смотреть весь каталог
+            .video-block__btn: button.btn.btn-arrow.btn-dark Акцция до 15 июля
+
+  section.section-accessories
+    .container
+      .accessories
+        .accessories__title Автоаксессуары от автофрант
+        .accessories__list
+          each item in product
+            .accessories__item: +card(item)
+
+
+block footer
+  footer
+    +banner()
+
+
+block scripts
+  script(src="js/main.js?v=1.52")
+  script(src="js/vendor.js")
